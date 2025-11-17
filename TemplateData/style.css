@@ -1,16 +1,181 @@
-body { padding: 0; margin: 0 }
-#unity-container { position: absolute }
-#unity-container.unity-desktop { left: 50%; top: 50%; transform: translate(-50%, -50%) }
-#unity-container.unity-mobile { position: fixed; width: 100%; height: 100% }
-#unity-canvas { background: #231F20 }
-.unity-mobile #unity-canvas { width: 100%; height: 100% }
-#unity-loading-bar { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: none }
-#unity-logo { width: 154px; height: 130px; background: url('unity-logo-dark.png') no-repeat center }
-#unity-progress-bar-empty { width: 141px; height: 18px; margin-top: 10px; margin-left: 6.5px; background: url('progress-bar-empty-dark.png') no-repeat center }
-#unity-progress-bar-full { width: 0%; height: 18px; margin-top: 10px; background: url('progress-bar-full-dark.png') no-repeat center }
-#unity-footer { position: relative }
-.unity-mobile #unity-footer { display: none }
-#unity-webgl-logo { float:left; width: 204px; height: 38px; background: url('webgl-logo.png') no-repeat center }
-#unity-build-title { float: right; margin-right: 10px; line-height: 38px; font-family: arial; font-size: 18px }
-#unity-fullscreen-button { cursor:pointer; float: right; width: 38px; height: 38px; background: url('fullscreen-button.png') no-repeat center }
-#unity-warning { position: absolute; left: 50%; top: 5%; transform: translate(-50%); background: white; padding: 10px; display: none }
+/* ----------------------------------
+   RESETEO Y ESTILOS GENERALES
+----------------------------------- */
+body {
+  padding: 0;
+  margin: 0;
+  font-family: 'Baloo Bhai 2', 'Chewy', sans-serif;
+  background: linear-gradient(to bottom, #A6D8FF, #FFFFFF);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  /* Ilustración suave estilo granja */
+  background-image:
+    radial-gradient(circle at 20% 90%, #7EC85066 0%, transparent 60%),
+    radial-gradient(circle at 80% 85%, #7EC85066 0%, transparent 60%);
+}
+
+/* ----------------------------------
+   CONTENEDOR PRINCIPAL UNITY
+----------------------------------- */
+#unity-container {
+  position: absolute;
+}
+
+#unity-container.unity-desktop {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#unity-container.unity-mobile {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+/* ----------------------------------
+   CANVAS CON MARCO TIPO MADERA
+----------------------------------- */
+#unity-canvas {
+  background: #000; /* dentro del juego */
+  border: 8px solid #C79A6A;     /* madera clara */
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+
+.unity-mobile #unity-canvas {
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  border: none;
+}
+
+/* ----------------------------------
+   BARRA DE CARGA – Estilo planta creciendo
+----------------------------------- */
+#unity-loading-bar {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  text-align: center;
+}
+
+/* logo mientras carga */
+#unity-logo {
+  width: 180px;
+  height: 80px;
+  border-radius: 12px;
+
+  /* madera clara estilo granja */
+  background: #C79A6A;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+}
+
+/* barra vacía estilo tierra */
+#unity-progress-bar-empty {
+  width: 180px;
+  height: 22px;
+  margin-top: 15px;
+  margin-left: 0;
+  background: #8B5A2B; /* tierra */
+  border-radius: 14px;
+  box-shadow: inset 0 0 8px rgba(0,0,0,0.4);
+  overflow: hidden;
+}
+
+/* barra llena estilo planta creciendo */
+#unity-progress-bar-full {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #4E7A2C, #89D46E);
+  border-radius: 14px;
+  transition: width 0.25s ease-out;
+}
+
+/* ----------------------------------
+   FOOTER UNITY (logos y fullscreen)
+----------------------------------- */
+#unity-footer {
+  position: relative;
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.unity-mobile #unity-footer {
+  display: none;
+}
+
+/* reemplazar logos por paneles más bonitos */
+#unity-webgl-logo {
+  float: left;
+  width: 200px;
+  height: 38px;
+  border-radius: 12px;
+  background: #C79A6A;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+}
+
+/* Título */
+#unity-build-title {
+  float: right;
+  margin-left: 15px;
+  margin-right: 10px;
+  line-height: 38px;
+  font-family: 'Baloo Bhai 2', sans-serif;
+  font-size: 22px;
+  color: #4E7A2C;
+  background: #FFF8ED;
+  padding: 4px 12px;
+  border-radius: 10px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+}
+
+/* ----------------------------------
+   BOTÓN FULLSCREEN – Estilo cartoon
+----------------------------------- */
+#unity-fullscreen-button {
+  cursor: pointer;
+  float: right;
+  width: 45px;
+  height: 45px;
+
+  background: #7EC850;
+  border-radius: 50%;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+  position: relative;
+  transition: transform 0.15s;
+}
+
+#unity-fullscreen-button:hover {
+  transform: scale(1.1);
+}
+
+/* icono "expandir" */
+#unity-fullscreen-button::before {
+  content: "⤢";
+  font-size: 24px;
+  color: white;
+  position: absolute;
+  top: 8px;
+  left: 10px;
+}
+
+/* ----------------------------------
+   ADVERTENCIAS
+----------------------------------- */
+#unity-warning {
+  position: absolute;
+  left: 50%;
+  top: 5%;
+  transform: translate(-50%);
+  background: #FFF8ED;
+  padding: 10px;
+  color: #8B0000;
+  border-radius: 10px;
+  display: none;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+}
